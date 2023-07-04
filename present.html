@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secret Password</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+    }
+    
+    .message {
+      text-align: center;
+      font-size: 16px;
+      padding: 20px;
+      padding-bottom: 0px;	
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      max-width: 350px;
+    }
+	
+    .input-field {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .submit-button {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px 20px;
+      margin-top: 20px;	
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #4CAF50;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+    }
+
+    .hint {
+      color: red;
+      margin-top: 10px;
+    }
+	
+	.riddle{
+	  line-height: 1.5;
+	}
+	
+  </style>
+</head>
+<body>
+
+  <div class="message">
+    <div class="riddle">
+      <p>В невидимой сети таинственных волн, <br>
+	  Информация пляшет в незримом поле. <br>
+	  В уме зарождаются звуки и знаки, <br>
+	  Связь без границ, непостижимый сюжет.</p>
+    </div>
+    <input type="text" id="password" name="password" class="input-field" placeholder="Введите ответ">
+    <button class="submit-button" onclick="checkPassword()">Submit</button>
+    <p id="result" class="result"></p>
+    <p id="hint" class="hint"></p>
+  </div>
+
+  <script>
+    var attempts = 0;
+
+    function decodeText(encodedText) {
+      var decodedText = decodeURIComponent(escape(atob(encodedText)));
+      return decodedText;
+    }
+    
+    function checkPassword() {
+      var passwordInput = document.getElementById("password").value.toLowerCase();
+      var resultElement = document.getElementById("result");
+      var hintElement = document.getElementById("hint");
+	  var secret = decodeText("0J3QsNGD0YjQvdC40LrQuA==").toLowerCase();
+	  var hint1 = decodeText("0K3RgtC+INGD0YHRgtGA0L7QudGB0YLQstC+INC90L7RgdC40YjRjCDQvdCwINGB0LXQsdC1LCDQvtC90L4g0YLQtdCx0LUg0LIg0LzQuNGAINC00YDRg9Cz0L7QuSDQvtGC0LrRgNGL0LLQsNC10YIg0LTQstC10YDQuC4=");
+	  var hint2 = decodeText("0KHQutCy0L7Qt9GMINCy0L7Qt9C00YPRhSDQvdC10LfRgNC40LzRi9C5INC/0L7RgtC+0Log0L/RgNC+0LHQtdCz0LDQtdGCLCDQt9Cy0YPQutC4INCyINGD0YjQsNGFINGC0LLQvtC40YUg0L7QttC40LLQsNC10YIsINGB0LjQvNGE0L7QvdC40Y8g0LzRi9GB0LvQtdC5INCyINC90ZHQvCDQt9Cy0YPRh9C40YIsINGN0YLQviDRg9GB0YLRgNC+0LnRgdGC0LLQviDQvNGD0LfRi9C60YMg0L/RgNC40LLQvdC+0YHQuNGCLg==");
+	  var hint3 = decodeText("0J3QsNGH0LjQvdCw0LXRgtGB0Y8g0L3QsCDQsdGD0LrQstGDOiDQvS4=");
+	  
+      
+      if (passwordInput === secret) {
+        var encodedMessage = "0JjRidC4INGB0LLQvtC5INC+0YLQstC10YIg0L3QsCDQutGD0YXQvdC1Lg==";
+        var decodedMessage = decodeText(encodedMessage);
+        
+        resultElement.textContent = decodedMessage;
+		hintElement.textContent = "";
+      } else {
+        attempts++;
+        resultElement.textContent = "Неправильный ответ.";
+        
+        if (attempts === 1) {
+          hintElement.textContent = hint1;
+        } else if (attempts === 2) {
+          hintElement.textContent = hint2;
+        } else {
+          hintElement.textContent = hint3;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
